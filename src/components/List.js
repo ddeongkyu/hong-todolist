@@ -9,7 +9,7 @@ const ListTodo = styled.div`
 `;
 
 function List() {
-  return <ListTodo></ListTodo>;
+  return <ListTodo />;
 }
 
 export default List;

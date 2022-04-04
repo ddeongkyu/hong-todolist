@@ -35,10 +35,10 @@ const Input = styled.input`
 
 function Create({ text }) {
   return (
-    <>
+    <form>
       <Input placeholder="할 일을 입력해보시던가요" value={text} />
       <SquareButton>등록ㅋㅋ</SquareButton>
-    </>
+    </form>
   );
 }
 
