@@ -4,8 +4,8 @@ import { MdDelete } from "react-icons/md";
 
 const Remove = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: right;
+  justify-content: right;
   color: #d2ee2e6;
 `;
 const Text = styled.div`
@@ -20,9 +20,15 @@ const ItemBlock = styled.div`
   padding-bottom: 12px;
 `;
 
-function Item({ id, text }) {
-  const onRemove = () => {};
-  return <Text>zzz</Text>;
+function Item({ todo, settodo, todoTodo }) {
+  return (
+    <ItemBlock>
+      <Text>{todoTodo}</Text>
+      <Remove>
+        <MdDelete />
+      </Remove>
+    </ItemBlock>
+  );
 }
 
 export default Item;
