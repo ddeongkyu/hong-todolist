@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Item from "./Item";
-import Input from "./Create";
 
 const ListTodo = styled.div`
   width: 100%;
@@ -10,17 +9,17 @@ const ListTodo = styled.div`
   font-size: 25px;
 `;
 
-function List({ todo, setTodo, todoTodo }) {
+function List({ todo, setTodo }) {
   return (
     <ListTodo>
       {todo &&
-        todo.map((todoTodo) => (
+        todo.map((todoItem) => (
           <Item
-            key={todo.id}
-            todoTodo={todoTodo}
+            key={todoItem.id}
+            todoItem={todoItem}
             todo={todo}
             setTodo={setTodo}
-          />
+          ></Item>
         ))}
     </ListTodo>
   );

@@ -7,6 +7,7 @@ const Remove = styled.div`
   align-items: right;
   justify-content: right;
   color: #d2ee2e6;
+  cursor: pointer;
 `;
 const Text = styled.div`
   flex: 1;
@@ -20,15 +21,22 @@ const ItemBlock = styled.div`
   padding-bottom: 12px;
 `;
 
-function Item({ todo, settodo, todoTodo }) {
+function Item({ todoItem, todo, setTodo }) {
+  const onRemove = (id) => {
+    setTodo(todo.filter((todo) => todo.id !== id));
+  };
   return (
-    <ItemBlock>
-      <Text>{todoTodo}</Text>
-      <Remove>
-        <MdDelete />
-      </Remove>
-    </ItemBlock>
+    <>
+      {todoItem.text === "" ? null : (
+        <ItemBlock>
+          <Text>{todoItem.text}</Text>
+          <Remove>
+            <MdDelete onClick={() => onRemove(todoItem.id)} />
+          </Remove>
+        </ItemBlock>
+      )}
+    </>
   );
 }
 
-export default Item;
+export default React.memo(Item);

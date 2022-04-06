@@ -8,13 +8,14 @@ const HeadBlock = styled.div`
     margin: 0;
     font-size: 30px;
     color: #ffe3e3;
+    text-align: center;
   }
 `;
 
 function Head() {
   return (
     <HeadBlock>
-      <h1>TODOLIST!!!!!!!!!!</h1>
+      <h1>TODOLIST</h1>
     </HeadBlock>
   );
 }

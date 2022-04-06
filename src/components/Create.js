@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { PropTypes } from "prop-types";
 
 const SquareButton = styled.button`
   background: red;
@@ -16,6 +15,8 @@ const SquareButton = styled.button`
   position: absolute;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Input = styled.input`
@@ -36,34 +37,31 @@ const Input = styled.input`
 
 function Create({ todo, setTodo }) {
   const [text, setText] = useState("");
-
   const changeInput = (e) => {
     setText(e.target.value);
+    // console.log(e.target);
   };
 
-  const clickButton = () => {
-    const nextTodo = todo.concat({
-      id: todo.length,
-      text,
-    });
+  const clickButton = (e) => {
+    e.preventDefault();
+    const nextTodo = todo.concat({ id: todo.length, text });
     setTodo(nextTodo);
     setText("");
   };
-
   return (
     <form>
       <Input
-        placeholder="자신있으면 입력해보세요."
+        placeholder="할 일을 입력하세요."
         value={text}
-        name="todoTodo"
+        name="todoItem"
         onChange={changeInput}
       />
 
-      <SquareButton type="submit" onClick={clickButton}>
-        등록ㅋㅋ
+      <SquareButton type="button" onClick={clickButton}>
+        등록
       </SquareButton>
     </form>
   );
 }
 
-export default Create;
+export default React.memo(Create);
