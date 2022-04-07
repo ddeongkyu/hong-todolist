@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MdDelete } from "react-icons/md";
+import { BsEraserFill } from "react-icons/bs";
 
 const Remove = styled.div`
   display: flex;
@@ -27,14 +27,12 @@ function Item({ todoItem, todo, setTodo }) {
   };
   return (
     <>
-      {todoItem.text === "" ? null : (
-        <ItemBlock>
-          <Text>{todoItem.text}</Text>
-          <Remove>
-            <MdDelete onClick={() => onRemove(todoItem.id)} />
-          </Remove>
-        </ItemBlock>
-      )}
+      <ItemBlock>
+        <Text>{todoItem.text}</Text>
+        <Remove>
+          <BsEraserFill onClick={() => onRemove(todoItem.id)} />
+        </Remove>
+      </ItemBlock>
     </>
   );
 }

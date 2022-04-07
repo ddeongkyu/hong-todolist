@@ -34,19 +34,24 @@ const Input = styled.input`
     outline: 2px solid red;
   }
 `;
-
+const todoId = function () {
+  return Math.random().toString(36).substring(2, 16);
+};
 function Create({ todo, setTodo }) {
   const [text, setText] = useState("");
   const changeInput = (e) => {
     setText(e.target.value);
-    // console.log(e.target);
   };
 
   const clickButton = (e) => {
     e.preventDefault();
-    const nextTodo = todo.concat({ id: todo.length, text });
-    setTodo(nextTodo);
-    setText("");
+    if (text === "") {
+      return null;
+    } else {
+      const nextTodo = todo.concat({ id: todoId(), text });
+      setTodo(nextTodo);
+      setText("");
+    }
   };
   return (
     <form>
@@ -56,7 +61,6 @@ function Create({ todo, setTodo }) {
         name="todoItem"
         onChange={changeInput}
       />
-
       <SquareButton type="button" onClick={clickButton}>
         등록
       </SquareButton>
