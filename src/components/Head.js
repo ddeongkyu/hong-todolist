@@ -3,12 +3,13 @@ import styled from "styled-components";
 
 const HeadBlock = styled.div`
   padding: 5px;
-  border-bottom: 1px solid #ffe3e3;
+  border-bottom: 1px solid #3bc9db;
   h1 {
     margin: 0;
     font-size: 30px;
-    color: #ffe3e3;
+    color: #3bc9db;
     text-align: center;
+    font-weight: bold;
   }
 `;
 

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-
 const SquareButton = styled.button`
-  background: red;
+  background: #3bc9db;
   cursor: pointer;
   width: 50px;
   height: 40px;
@@ -31,41 +30,24 @@ const Input = styled.input`
   display: flex;
   flex-direction: row;
   :focus-visible {
-    outline: 2px solid red;
+    outline: 2px solid #3bc9db;
   }
 `;
-const todoId = function () {
-  return Math.random().toString(36).substring(2, 16);
-};
-function Create({ todo, setTodo }) {
-  const [text, setText] = useState("");
-  const changeInput = (e) => {
-    setText(e.target.value);
-  };
 
-  const clickButton = (e) => {
-    e.preventDefault();
-    if (text === "") {
-      return null;
-    } else {
-      const nextTodo = todo.concat({ id: todoId(), text });
-      setTodo(nextTodo);
-      setText("");
-    }
-  };
+function CreateTodo({ onChange, onAddTodo, text }) {
   return (
     <form>
       <Input
         placeholder="할 일을 입력하세요."
         value={text}
         name="todoItem"
-        onChange={changeInput}
+        onChange={onChange}
       />
-      <SquareButton type="button" onClick={clickButton}>
+      <SquareButton type="button" onClick={onAddTodo}>
         등록
       </SquareButton>
     </form>
   );
 }
 
-export default React.memo(Create);
+export default React.memo(CreateTodo);

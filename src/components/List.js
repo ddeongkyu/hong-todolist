@@ -1,28 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import Item from "./Item";
+import TodoItem from "./Item";
 
 const ListTodo = styled.div`
   width: 100%;
   height: auto;
-  background: none;
   font-size: 25px;
 `;
 
-function List({ todo, setTodo }) {
+function TodoItems({ todo = [], setTodo, onRemove }) {
   return (
     <ListTodo>
-      {todo &&
-        todo.map((todoItem) => (
-          <Item
-            key={todoItem.id}
-            todoItem={todoItem}
-            todo={todo}
-            setTodo={setTodo}
-          ></Item>
-        ))}
+      {todo.map((todoItem) => (
+        <TodoItem
+          todoItem={todoItem}
+          onRemove={onRemove}
+          key={todoItem.id}
+          todo={todo}
+          setTodo={setTodo}
+        ></TodoItem>
+      ))}
     </ListTodo>
   );
 }
 
-export default List;
+export default TodoItems;

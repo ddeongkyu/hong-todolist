@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { BsEraserFill } from "react-icons/bs";
+import { HiX } from "react-icons/hi";
 
 const Remove = styled.div`
   display: flex;
@@ -19,22 +19,32 @@ const ItemBlock = styled.div`
   align-items: center;
   padding-top: 12px;
   padding-bottom: 12px;
+  &:hover {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.05), 0 6px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.1s linear;
+  }
 `;
 
-function Item({ todoItem, todo, setTodo }) {
-  const onRemove = (id) => {
+function TodoItem({ todoItem, todo, setTodo }) {
+  const [checked, setChecked] = useState(false);
+  const onRemoveItem = (id) => {
     setTodo(todo.filter((todo) => todo.id !== id));
   };
+
+  const onChange = (e) => {
+    setChecked(e.currentTarget.checked);
+  };
   return (
-    <>
-      <ItemBlock>
-        <Text>{todoItem.text}</Text>
-        <Remove>
-          <BsEraserFill onClick={() => onRemove(todoItem.id)} />
-        </Remove>
-      </ItemBlock>
-    </>
+    <ItemBlock>
+      <input type="checkbox" checked={checked} onChange={onChange} />
+      <Text style={{ textDecoration: checked && "line-through" }}>
+        {todoItem.text}
+      </Text>
+      <Remove>
+        <HiX onClick={() => onRemoveItem(todoItem.id)} />
+      </Remove>
+    </ItemBlock>
   );
 }
 
-export default React.memo(Item);
+export default React.memo(TodoItem);
