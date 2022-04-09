@@ -4,7 +4,8 @@ import CreateTodo from "./components/Create";
 import Head from "./components/Head";
 import TodoItems from "./components/List";
 import generateRandomTodoId from "./util/generateRandomTodoId";
-
+import Login from "./components/Login";
+import SignUpForm from "./components/SignUp";
 function App() {
   const [todo, setTodo] = useState([]);
   const [text, setText] = useState("");
@@ -26,11 +27,14 @@ function App() {
   };
 
   return (
-    <Container>
-      <Head />
-      <TodoItems todo={todo} setTodo={setTodo} />
-      <CreateTodo onChange={onChange} onAddTodo={onAddTodo} text={text} />
-    </Container>
+    <>
+      <Login />
+    </>
+    // <Container>
+    //   <Head />
+    //   <TodoItems todo={todo} setTodo={setTodo} />
+    //   <CreateTodo onChange={onChange} onAddTodo={onAddTodo} text={text} />
+    // </Container>
   );
 }
 
