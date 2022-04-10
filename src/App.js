@@ -1,40 +1,18 @@
-import React, { useState } from "react";
-import Container from "./components/Container";
-import CreateTodo from "./components/Create";
-import Head from "./components/Head";
-import TodoItems from "./components/List";
-import generateRandomTodoId from "./util/generateRandomTodoId";
+import React from "react";
 import Login from "./components/Login";
 import SignUpForm from "./components/SignUp";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import TodoMerge from "./components/TodoMerge";
+
 function App() {
-  const [todo, setTodo] = useState([]);
-  const [text, setText] = useState("");
-
-  const onChange = (e) => {
-    setText(e.target.value);
-  };
-
-  const onAddTodo = (e) => {
-    e.preventDefault();
-    if (text === "") {
-      return null;
-    } else {
-      const nextTodo = [...todo, { id: generateRandomTodoId(), text }];
-      // const nextTodo = todo.concat({ id: generateRandomTodoId(), text }) // 도 가능
-      setTodo(nextTodo);
-      setText("");
-    }
-  };
-
   return (
-    <>
-      <Login />
-    </>
-    // <Container>
-    //   <Head />
-    //   <TodoItems todo={todo} setTodo={setTodo} />
-    //   <CreateTodo onChange={onChange} onAddTodo={onAddTodo} text={text} />
-    // </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/SignUp" element={<SignUpForm />} />
+        <Route path="/Todo" element={<TodoMerge />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -33,10 +33,17 @@ function TodoItem({ todoItem, todo, setTodo }) {
 
   const onChange = (e) => {
     setChecked(e.currentTarget.checked);
+    console.log(e.target.checked);
+    console.log(e.target);
   };
   return (
     <ItemBlock>
-      <input type="checkbox" checked={checked} onChange={onChange} />
+      <input
+        className="input"
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+      />
       <Text style={{ textDecoration: checked && "line-through" }}>
         {todoItem.text}
       </Text>

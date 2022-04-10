@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const LoginHead = styled.div`
   padding: 5px;
@@ -81,16 +82,32 @@ const SignUpBtn = styled.button`
   border-radius: 0;
   background-color: #03c75a;
 `;
-function Login() {
+
+function Login({ userId, userPw }) {
+  let navigate = useNavigate();
+  function handleClick() {
+    navigate("/SignUp");
+  }
+  function handleClickClick() {
+    navigate("/Todo");
+  }
+  // console.log(localStorage.getItem(JSON.stringify(userId, userPw)));
+  // console.log(window.localStorage);
   return (
     <LoginContainer>
       <LoginHead>
         <h1>로그인</h1>
       </LoginHead>
-      <IdInput placeholder="Id" id="id" name="id" />
+      <IdInput placeholder="Id" />
       <PwInput placeholder="Pw" id="password" name="password" type="password" />
-      <LoginBtn type="button">Login</LoginBtn>
-      <SignUpBtn>Sign Up</SignUpBtn>
+      <LoginBtn type="button" onClick={handleClickClick}>
+        Login
+      </LoginBtn>
+      {[{ id: "" }, { pw: "" }] ===
+      window.localStorage.getItem([userId, userPw])
+        ? console.log("zzz")
+        : console.log("살려줘")}
+      <SignUpBtn onClick={handleClick}>Sign Up</SignUpBtn>
     </LoginContainer>
   );
 }

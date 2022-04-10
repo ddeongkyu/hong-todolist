@@ -1,4 +1,5 @@
-import React from "react";
+// import { JSON } from "mysql/lib/protocol/constants/types";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const SignUpHead = styled.div`
@@ -63,15 +64,44 @@ const SignUpSummitBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function SignUpForm() {
+function SignUpForm({}) {
+  const [userId, setUserId] = useState("");
+  const [userPw, setUserPw] = useState("");
+  const saveData = () => {
+    const userObjectId = { id: userId };
+    const userObjectPw = { pw: userPw };
+    window.localStorage.setItem(
+      [userId, userPw],
+      JSON.stringify([userObjectId, userObjectPw])
+    );
+    // window.localStorage.setItem();
+    console.log(localStorage);
+    // window.localStorage.clear();
+    console.log(window.localStorage.getItem([userId, userPw]));
+  };
+  const onChangeId = (e) => {
+    setUserId(e.target.value);
+  };
+  const onChangePw = (e) => {
+    setUserPw(e.target.value);
+  };
   return (
     <SignUpContainer>
       <SignUpHead>
         <h1>회원가입</h1>
       </SignUpHead>
-      <SignUpIdInput placeholder="사용할 ID를 입력하세요" />
-      <SignUpPwInput placeholder="사용할 PW를 입력하세요" type="password" />
-      <SignUpSummitBtn>SUMMIT!</SignUpSummitBtn>
+      <SignUpIdInput
+        placeholder="사용할 ID를 입력하세요"
+        value={userId}
+        onChange={onChangeId}
+      />
+      <SignUpPwInput
+        placeholder="사용할 PW를 입력하세요"
+        type="password"
+        value={userPw}
+        onChange={onChangePw}
+      />
+      <SignUpSummitBtn onClick={saveData}>SUMMIT!</SignUpSummitBtn>
     </SignUpContainer>
   );
 }
