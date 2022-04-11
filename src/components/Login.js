@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 const LoginHead = styled.div`
   padding: 5px;
   border-bottom: 1px solid #3bc9db;
   width: 250px;
   height: 40px;
-
   h1 {
     margin: 0;
     font-size: 30px;
@@ -16,7 +14,6 @@ const LoginHead = styled.div`
     font-weight: bold;
   }
 `;
-
 const LoginContainer = styled.div`
   margin-top: 100px;
   padding: 20px;
@@ -45,7 +42,6 @@ const PwInput = styled.input`
   background: #fff;
   box-sizing: border-box;
 `;
-
 const LoginBtn = styled.button`
   font-size: 18px;
   font-weight: 700;
@@ -60,13 +56,7 @@ const LoginBtn = styled.button`
   border: none;
   border-radius: 0;
   background-color: #03c75a;
-  ${({ disabled }) =>
-    disabled &&
-    `
-  background-color: #efefef;
-`}
 `;
-
 const SignUpBtn = styled.button`
   font-size: 18px;
   font-weight: 700;
@@ -83,30 +73,49 @@ const SignUpBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function Login({ userId, userPw }) {
+function Login() {
+  const [id, setId] = useState("");
+  const [pw, setPw] = useState("");
+  const onChangeId = (e) => {
+    setId(e.target.value);
+  };
+  const onChangePw = (e) => {
+    setPw(e.target.value);
+  };
+  const loginId = [];
+  for (let i = 0; i < window.localStorage.length; i++) {
+    loginId.push(window.localStorage.key(i));
+  }
   let navigate = useNavigate();
-  function handleClick() {
+  function handleClick(e) {
     navigate("/SignUp");
   }
   function handleClickClick() {
-    navigate("/Todo");
+    for (let i = 0; i < window.localStorage.length; i++) {
+      window.localStorage.key(i) === id &&
+      window.localStorage.getItem(loginId[i]) === pw
+        ? navigate("/Todo")
+        : alert("ID/PW 확인바람ㅋㅋ");
+    }
   }
-  // console.log(localStorage.getItem(JSON.stringify(userId, userPw)));
-  // console.log(window.localStorage);
+
   return (
     <LoginContainer>
       <LoginHead>
         <h1>로그인</h1>
       </LoginHead>
-      <IdInput placeholder="Id" />
-      <PwInput placeholder="Pw" id="password" name="password" type="password" />
+      <IdInput placeholder="Id" value={id} onChange={onChangeId} />
+      <PwInput
+        placeholder="Pw"
+        value={pw}
+        id="password"
+        name="password"
+        type="password"
+        onChange={onChangePw}
+      />
       <LoginBtn type="button" onClick={handleClickClick}>
         Login
       </LoginBtn>
-      {[{ id: "" }, { pw: "" }] ===
-      window.localStorage.getItem([userId, userPw])
-        ? console.log("zzz")
-        : console.log("살려줘")}
       <SignUpBtn onClick={handleClick}>Sign Up</SignUpBtn>
     </LoginContainer>
   );

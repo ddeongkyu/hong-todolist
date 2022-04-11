@@ -64,20 +64,14 @@ const SignUpSummitBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function SignUpForm({}) {
+function SignUpForm() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const saveData = () => {
-    const userObjectId = { id: userId };
-    const userObjectPw = { pw: userPw };
-    window.localStorage.setItem(
-      [userId, userPw],
-      JSON.stringify([userObjectId, userObjectPw])
-    );
-    // window.localStorage.setItem();
-    console.log(localStorage);
-    // window.localStorage.clear();
-    console.log(window.localStorage.getItem([userId, userPw]));
+    window.localStorage.setItem(userId, userPw);
+    alert("회원가입이 완료되었습니다.");
+    setUserId("");
+    setUserPw("");
   };
   const onChangeId = (e) => {
     setUserId(e.target.value);
@@ -85,6 +79,7 @@ function SignUpForm({}) {
   const onChangePw = (e) => {
     setUserPw(e.target.value);
   };
+
   return (
     <SignUpContainer>
       <SignUpHead>
