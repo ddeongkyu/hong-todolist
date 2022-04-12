@@ -82,20 +82,16 @@ function Login() {
   const onChangePw = (e) => {
     setPw(e.target.value);
   };
-  const loginId = [];
-  for (let i = 0; i < window.localStorage.length; i++) {
-    loginId.push(window.localStorage.key(i));
-  }
   let navigate = useNavigate();
   function handleClick(e) {
     navigate("/SignUp");
   }
   function handleClickClick() {
-    for (let i = 0; i < window.localStorage.length; i++) {
-      window.localStorage.key(i) === id &&
-      window.localStorage.getItem(loginId[i]) === pw
-        ? navigate("/Todo")
-        : alert("ID/PW 확인바람ㅋㅋ");
+    if (window.localStorage.getItem(id) === pw) {
+      alert(id + "님 환영합니다.");
+      navigate("/Todo");
+    } else {
+      alert("ID/PW확인요망");
     }
   }
 

@@ -5,41 +5,58 @@ import Head from "./Head";
 import TodoItems from "./List";
 import generateRandomTodoId from "../util/generateRandomTodoId";
 
-function TodoMerge() {
+function TodoApp() {
   const [todo, setTodo] = useState([]);
   const [text, setText] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [isDeleted, setisDeleted] = useState(false);
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onAddTodo = (e) => {
     e.preventDefault();
-    // console.log(e.target);
-
     if (text === "") {
       return null;
     } else {
-      const nextTodo = [...todo, { id: generateRandomTodoId(), text }];
-      // const nextTodo = todo.concat({ id: generateRandomTodoId(), text }) // 도 가능
+      const nextTodo = [
+        ...todo,
+        { id: generateRandomTodoId(), text, isDeleted: false },
+      ];
       setTodo(nextTodo);
       setText("");
-    }
-
-    const list = document.getElementById("box");
-    const chkbox = document.querySelectorAll("#box .btn-chk");
-    for (let i in chkbox) {
-      if (chkbox[i].checked === true) {
-        list.removeChild(chkbox[i].parentNode);
-      }
+      setTodo(todo.filter((todo) => todo.isDeleted === true));
     }
   };
+
+  const onChangeChk = (e) => {
+    setChecked(e.currentTarget.checked);
+    const onToggle = () => {
+      setTodo(
+        todo.map((todo) =>
+          todo.isDeleted === false
+            ? { ...todo, isDeleted: !todo.isDeleted }
+            : todo
+        )
+      );
+    };
+    onToggle();
+  };
+
   return (
     <Container>
       <Head />
-      <TodoItems todo={todo} setTodo={setTodo} />
+      <TodoItems
+        todo={todo}
+        setTodo={setTodo}
+        isDeleted={isDeleted}
+        setisDeleted={setisDeleted}
+        checked={checked}
+        setChecked={setChecked}
+        onChangeChk={onChangeChk}
+      />
       <CreateTodo onChange={onChange} onAddTodo={onAddTodo} text={text} />
-      {/* <button onClick={delChk}>zzz</button> */}
     </Container>
   );
 }
 
-export default TodoMerge;
+export default TodoApp;

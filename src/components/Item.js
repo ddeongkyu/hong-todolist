@@ -25,34 +25,29 @@ const ItemBlock = styled.div`
   }
 `;
 
-function TodoItem({ todoItem, todo, setTodo }) {
-  const [checked, setChecked] = useState(false);
+function TodoItem({
+  todoItem,
+  todo,
+  setTodo,
+  isDeleted,
+  checked,
+  setChecked,
+  onChangeChk,
+}) {
   const onRemoveItem = (id) => {
     setTodo(todo.filter((todo) => todo.id !== id));
   };
-  const onChange = (e) => {
-    setChecked(e.currentTarget.checked);
-    // console.log(e.target.checked);
-    // console.log(e.target);
-    // console.log(checked);
-  };
+
   return (
-    <div>
-      <ItemBlock id="box">
-        <input
-          className="btn-chk"
-          type="checkbox"
-          checked={checked}
-          onChange={onChange}
-        />
-        <Text style={{ textDecoration: checked && "line-through" }}>
-          {todoItem.text}
-        </Text>
-        <Remove>
-          <HiX onClick={() => onRemoveItem(todoItem.id)} />
-        </Remove>
-      </ItemBlock>
-    </div>
+    <ItemBlock>
+      <input type="checkbox" onChange={onChangeChk} />
+      <Text style={{ textDecoration: checked && "line-through" }}>
+        {todoItem.text}
+      </Text>
+      <Remove>
+        <HiX onClick={() => onRemoveItem(todoItem.id)} />
+      </Remove>
+    </ItemBlock>
   );
 }
 
