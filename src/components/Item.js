@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { HiX } from "react-icons/hi";
-
 const Remove = styled.div`
   display: flex;
   align-items: right;
@@ -37,7 +36,6 @@ function TodoItem({
   const onRemoveItem = (id) => {
     setTodo(todo.filter((todo) => todo.id !== id));
   };
-
   return (
     <ItemBlock>
       <input type="checkbox" onChange={onChangeChk} />

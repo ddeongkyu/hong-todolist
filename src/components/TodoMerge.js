@@ -24,24 +24,46 @@ function TodoApp() {
       ];
       setTodo(nextTodo);
       setText("");
-      setTodo(todo.filter((todo) => todo.isDeleted === true));
+      // setTodo(todo.filter((todo) => todo.id !== false));
     }
   };
 
   const onChangeChk = (e) => {
-    setChecked(e.currentTarget.checked);
-    const onToggle = () => {
-      setTodo(
-        todo.map((todo) =>
-          todo.isDeleted === false
-            ? { ...todo, isDeleted: !todo.isDeleted }
-            : todo
-        )
-      );
-    };
-    onToggle();
+    for (let i = 1; i < todo.length; i++) {
+      console.log(todo[i]);
+    }
+    // console.log();
+    // console.log();
+    // if (
+    //   e.target.id === todo.id
+    //   // &&e.target.checked === false
+    // ) {
+    //   setTodo(
+    //     todo.map((todo) =>
+    //       todo.isDeleted === false
+    //         ? { ...todo, isDeleted: !todo.isDeleted }
+    //         : todo
+    //     )
+    //   );
+    // } else {
+    //   console.log("?");
+    // }
+    // if (e.target.checked === false) {
+    //   setTodo([{ ...(e.target.isDeleted === !isDeleted) }]);
+    // } else if (e.target.checked === true) {
+    //   setTodo([{ ...(e.target.isDeleted === !isDeleted) }]);
+    // }
+    // const chkTarget = e.target.checked;
+    // console.log(chkTarget);
+    // if(chkTarget === true) {
+    //   setTodo(todo.map((chkTarget) =>{...todo, chkTarget.isDeleted: !isDeleted})
+    // }
+    // console.log(e.target);
   };
-
+  console.log(todo);
+  // console.log(todo[0].index);
+  // const findTodoIndex = (e) => e.
+  // todo.findIndex(findTodoIndex(1));
   return (
     <Container>
       <Head />

@@ -1,6 +1,7 @@
 // import { JSON } from "mysql/lib/protocol/constants/types";
 import React, { useState } from "react";
 import styled from "styled-components";
+import TodoItems from "./List";
 
 const SignUpHead = styled.div`
   padding: 5px;
@@ -67,8 +68,13 @@ const SignUpSummitBtn = styled.button`
 function SignUpForm() {
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
+  const [login, setLogin] = useState(false);
+
   const saveData = () => {
-    window.localStorage.setItem(userId, userPw);
+    window.localStorage.setItem(
+      userId,
+      JSON.stringify({ userId, userPw, login })
+    );
     alert("회원가입이 완료되었습니다.");
     setUserId("");
     setUserPw("");

@@ -87,7 +87,17 @@ function Login() {
     navigate("/SignUp");
   }
   function handleClickClick() {
-    if (window.localStorage.getItem(id) === pw) {
+    // console.log(JSON.parse(localStorage.getItem("1234")).userPw);
+    // console.log(JSON.parse(localStorage.getItem("1234")));
+    // // console.log(window.localStorage.getItem("id"));
+    // console.log(JSON.parse(localStorage.getItem("1234")).userId);
+    if (
+      id === JSON.parse(localStorage.getItem(id)).userId &&
+      pw === JSON.parse(localStorage.getItem(id)).userPw
+    ) {
+      const getData = JSON.parse(localStorage.getItem(id));
+      getData.login = true;
+      localStorage.setItem(id, JSON.stringify(getData));
       alert(id + "님 환영합니다.");
       navigate("/Todo");
     } else {
