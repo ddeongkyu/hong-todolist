@@ -10,13 +10,10 @@ const ListTodo = styled.div`
 
 function TodoItems({
   todo = [],
-  setTodo,
   onRemove,
   onChangeChk,
-  isDeleted,
-  checked,
-  setisDeleted,
-  setChecked,
+  onRemoveItem,
+  todoItem,
 }) {
   return (
     <ListTodo>
@@ -25,14 +22,11 @@ function TodoItems({
           todoItem={todoItem}
           onRemove={onRemove}
           key={todoItem.id}
-          todo={todo}
-          setTodo={setTodo}
           onChangeChk={onChangeChk}
-          isDeleted={isDeleted}
-          setisDeleted={setisDeleted}
-          checked={checked}
-          setChecked={setChecked}
-        ></TodoItem>
+          onRemoveItem={onRemoveItem}
+        >
+          {console.log(todoItem)}
+        </TodoItem>
       ))}
     </ListTodo>
   );

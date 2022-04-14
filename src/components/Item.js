@@ -24,18 +24,7 @@ const ItemBlock = styled.div`
   }
 `;
 
-function TodoItem({
-  todoItem,
-  todo,
-  setTodo,
-  isDeleted,
-  checked,
-  setChecked,
-  onChangeChk,
-}) {
-  const onRemoveItem = (id) => {
-    setTodo(todo.filter((todo) => todo.id !== id));
-  };
+function TodoItem({ todoItem, onRemoveItem, checked, onChangeChk }) {
   return (
     <ItemBlock>
       <input type="checkbox" onChange={onChangeChk} />

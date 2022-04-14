@@ -5,11 +5,18 @@ import Head from "./Head";
 import TodoItems from "./List";
 import generateRandomTodoId from "../util/generateRandomTodoId";
 
-function TodoApp() {
-  const [todo, setTodo] = useState([]);
-  const [text, setText] = useState("");
-  const [checked, setChecked] = useState(false);
-  const [isDeleted, setisDeleted] = useState(false);
+function TodoApp({
+  id,
+  pw,
+  setId,
+  setPw,
+  todo,
+  setTodo,
+  text,
+  setText,
+  todoItem,
+  login,
+}) {
   const onChange = (e) => {
     setText(e.target.value);
   };
@@ -22,16 +29,39 @@ function TodoApp() {
         ...todo,
         { id: generateRandomTodoId(), text, isDeleted: false },
       ];
+      // const handleChecked = (todoItemId) => {
+      //   const changedTodo = todo.filter((todoItem) => {
+      //     console.log(todoItem);
+      //     if (
+      //       // todoItem.isDeleted === false
+      //       todoItem.isDeleted === true
+      //     ) {
+      //       return [...todo, { isDeleted: !todo.isDeleted }];
+      //     }
+      //     return todo + console.log("??");
+      //   });
+      //   setTodo(changedTodo);
+      // };
+      // setTodo([...todo, handleChecked, nextTodo]);
+      console.log(nextTodo);
       setTodo(nextTodo);
       setText("");
+      // console.log(todo);
+
       // setTodo(todo.filter((todo) => todo.id !== false));
+      const getData = JSON.parse(localStorage.getItem(id));
+      // console.log(getData);
+      localStorage.setItem(id, JSON.stringify(getData));
     }
   };
-
+  const onRemoveItem = (id) => {
+    setTodo(todo.filter((todo) => todo.id !== id));
+  };
   const onChangeChk = (e) => {
-    for (let i = 1; i < todo.length; i++) {
-      console.log(todo[i]);
-    }
+    console.log(e.todoItem);
+    // todoItem.isDeleted === !todoItem.isDeleted;
+    // console.log(todo.length);
+    // console.log(todo[0]);
     // console.log();
     // console.log();
     // if (
@@ -60,21 +90,20 @@ function TodoApp() {
     // }
     // console.log(e.target);
   };
-  console.log(todo);
+  // console.log(todo);
+  // console.log(todoItem);
   // console.log(todo[0].index);
   // const findTodoIndex = (e) => e.
   // todo.findIndex(findTodoIndex(1));
   return (
     <Container>
-      <Head />
+      <Head id={id} setId={setId} pw={pw} setPw={setPw} login={login} />
       <TodoItems
         todo={todo}
         setTodo={setTodo}
-        isDeleted={isDeleted}
-        setisDeleted={setisDeleted}
-        checked={checked}
-        setChecked={setChecked}
         onChangeChk={onChangeChk}
+        onRemoveItem={onRemoveItem}
+        todoItem={todoItem}
       />
       <CreateTodo onChange={onChange} onAddTodo={onAddTodo} text={text} />
     </Container>

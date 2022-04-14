@@ -1,7 +1,6 @@
 // import { JSON } from "mysql/lib/protocol/constants/types";
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import TodoItems from "./List";
 
 const SignUpHead = styled.div`
   padding: 5px;
@@ -65,16 +64,13 @@ const SignUpSummitBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function SignUpForm() {
-  const [userId, setUserId] = useState("");
-  const [userPw, setUserPw] = useState("");
-  const [login, setLogin] = useState(false);
-
+function SignUpForm({ userId, userPw, setUserId, setUserPw, todo, setTodo }) {
   const saveData = () => {
     window.localStorage.setItem(
       userId,
-      JSON.stringify({ userId, userPw, login })
+      JSON.stringify({ userId, userPw, todo })
     );
+    // window.localStorage.setItem(login, JSON.stringify({ userId }));
     alert("회원가입이 완료되었습니다.");
     setUserId("");
     setUserPw("");

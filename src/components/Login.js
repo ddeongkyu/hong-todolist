@@ -73,9 +73,7 @@ const SignUpBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function Login() {
-  const [id, setId] = useState("");
-  const [pw, setPw] = useState("");
+function Login({ id, pw, setId, setPw, login }) {
   const onChangeId = (e) => {
     setId(e.target.value);
   };
@@ -98,7 +96,10 @@ function Login() {
       const getData = JSON.parse(localStorage.getItem(id));
       getData.login = true;
       localStorage.setItem(id, JSON.stringify(getData));
+      localStorage.setItem(login, JSON.stringify({ id }));
       alert(id + "님 환영합니다.");
+      // setId("");
+      // setPw("");
       navigate("/Todo");
     } else {
       alert("ID/PW확인요망");
