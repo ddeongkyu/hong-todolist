@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { HiX } from "react-icons/hi";
+// import generateRandomTodoId from "../util/generateRandomTodoId";
 const Remove = styled.div`
   display: flex;
   align-items: right;
@@ -12,6 +13,7 @@ const Text = styled.div`
   flex: 1;
   font-size: 21px;
   color: #495057;
+  // text-decoration: line-through;
 `;
 const ItemBlock = styled.div`
   display: flex;
@@ -24,11 +26,24 @@ const ItemBlock = styled.div`
   }
 `;
 
-function TodoItem({ todoItem, onRemoveItem, checked, onChangeChk }) {
+function TodoItem({ todoItem, onRemoveItem, checked }) {
+  const isDeletedChange = (e) => {
+    if (e.target.checked === false) {
+      todoItem.isDeleted = false;
+      // todoItem.text.style.color = {red}
+    } else if (e.target.checked === true) {
+      todoItem.isDeleted = true;
+      // console.log(todoItem.id);
+      // todoItem.text.style.color = "red";
+    }
+  };
   return (
     <ItemBlock>
-      <input type="checkbox" onChange={onChangeChk} />
-      <Text style={{ textDecoration: checked && "line-through" }}>
+      <input type="checkbox" onChange={isDeletedChange} />
+      <Text
+        // id={generateRandomTodoId()}
+        style={{ textDecoration: checked && "line-through" }}
+      >
         {todoItem.text}
       </Text>
       <Remove>
