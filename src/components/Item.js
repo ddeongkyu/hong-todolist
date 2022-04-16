@@ -14,6 +14,11 @@ const Text = styled.div`
   font-size: 21px;
   color: #495057;
   // text-decoration: line-through;
+  ${({ isDeleted }) => {
+    return isDeleted === true
+      ? `text-decoration: line-through`
+      : `text-decoration: none`;
+  }}
 `;
 const ItemBlock = styled.div`
   display: flex;
@@ -27,21 +32,26 @@ const ItemBlock = styled.div`
 `;
 
 function TodoItem({ todoItem, onRemoveItem, checked }) {
+  const isDeleted = todoItem.isDeleted;
   const isDeletedChange = (e) => {
     if (e.target.checked === false) {
       todoItem.isDeleted = false;
-      // todoItem.text.style.color = {red}
+      console.log(todoItem.isDeleted);
+      // Text.className = "zzz";
+      // console.log(Text.className);
     } else if (e.target.checked === true) {
       todoItem.isDeleted = true;
-      // console.log(todoItem.id);
-      // todoItem.text.style.color = "red";
+      console.log(todoItem.isDeleted);
+
+      // Text.className = "bbb";
+      // console.log(Text.className);
     }
   };
   return (
     <ItemBlock>
       <input type="checkbox" onChange={isDeletedChange} />
       <Text
-        // id={generateRandomTodoId()}
+        isDeleted={isDeleted}
         style={{ textDecoration: checked && "line-through" }}
       >
         {todoItem.text}

@@ -66,6 +66,8 @@ const SignUpSummitBtn = styled.button`
 
 function SignUpForm({ userId, userPw, setUserId, setUserPw, todo, setTodo }) {
   const saveData = () => {
+    // 1. 회원가입할때 localstorage에 key 값으로는 유저가 입력한 id를 넣는다.
+    // 2. id의 value에는 비밀번호, todo[](배열ㅎㅎ)을 넣는다.
     window.localStorage.setItem(
       userId,
       JSON.stringify({ userId, userPw, todo })

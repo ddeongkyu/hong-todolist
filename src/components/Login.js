@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const LoginHead = styled.div`
@@ -85,18 +85,18 @@ function Login({ id, pw, setId, setPw, login }) {
     navigate("/SignUp");
   }
   function handleClickClick() {
-    // console.log(JSON.parse(localStorage.getItem("1234")).userPw);
-    // console.log(JSON.parse(localStorage.getItem("1234")));
-    // // console.log(window.localStorage.getItem("id"));
-    // console.log(JSON.parse(localStorage.getItem("1234")).userId);
+    // 3. Login 페이지에서 id,pw 작성 후 로그인 버튼을 누르면 ->
+    // Login이라는 key값이 생기고 value에 id를 넣음. (그 전에 유저가 입력한 id가 localstorage의 pw와 일치하는지 여부 확인 필수)
     if (
       id === JSON.parse(localStorage.getItem(id)).userId &&
       pw === JSON.parse(localStorage.getItem(id)).userPw
     ) {
-      const getData = JSON.parse(localStorage.getItem(id));
-      getData.login = true;
-      localStorage.setItem(id, JSON.stringify(getData));
+      // const getData = JSON.parse(localStorage.getItem(id));
+      // getData.login = true;
+      // localStorage.setItem(id, JSON.stringify(getData));
       localStorage.setItem(login, JSON.stringify({ id }));
+      console.log(JSON.parse(localStorage.getItem(login)));
+      // 4. 로그인 성공시 메세지 출력과 함께 TodoApp으로 이동함
       alert(id + "님 환영합니다.");
       // setId("");
       // setPw("");
