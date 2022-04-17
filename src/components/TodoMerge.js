@@ -19,16 +19,16 @@ function TodoApp({
 }) {
   useEffect(() => {
     console.log(window.localStorage.getItem(id));
+    console.log(JSON.parse(window.localStorage.getItem(login)));
     console.log("MOUNT");
-    console.log(JSON.parse(window.localStorage.getItem(id)).todo);
-    const alreadyTodo = JSON.parse(window.localStorage.getItem(id)).todo;
-    console.log(alreadyTodo);
-    <TodoItems
-      todo={alreadyTodo}
-      setTodo={setTodo}
-      onRemoveItem={onRemoveItem}
-      todoItem={todoItem}
-    />;
+    if (JSON.parse(window.localStorage.getItem(login)).id === id) {
+      const point = JSON.parse(window.localStorage.getItem(login)).id;
+      const pointTodo = JSON.parse(window.localStorage.getItem(point)).todo;
+      setTodo(pointTodo);
+      console.log(pointTodo);
+    } else {
+      console.log("zzz");
+    }
   }, []);
   const onChange = (e) => {
     setText(e.target.value);
@@ -61,6 +61,8 @@ function TodoApp({
     getData.todo = todo;
     window.localStorage.setItem(id, JSON.stringify(getData));
     console.log(getData);
+  } else {
+    console.log("???");
   }
 
   return (
