@@ -19,7 +19,15 @@ function App() {
         <Route
           path="/"
           element={
-            <Login id={id} pw={pw} setId={setId} setPw={setPw} login={login} />
+            <Login
+              id={id}
+              pw={pw}
+              setId={setId}
+              setPw={setPw}
+              login={login}
+              todo={todo}
+              setTodo={setTodo}
+            />
           }
         />
         <Route

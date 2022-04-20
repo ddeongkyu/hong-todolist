@@ -1,6 +1,7 @@
 // import { JSON } from "mysql/lib/protocol/constants/types";
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const SignUpHead = styled.div`
   padding: 5px;
@@ -64,7 +65,8 @@ const SignUpSummitBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function SignUpForm({ userId, userPw, setUserId, setUserPw, todo, setTodo }) {
+function SignUpForm({ userId, userPw, setUserId, setUserPw, todo }) {
+  let navigate = useNavigate();
   const saveData = () => {
     // 1. 회원가입할때 localstorage에 key 값으로는 유저가 입력한 id를 넣는다.
     // 2. id의 value에는 비밀번호, todo[](배열ㅎㅎ)을 넣는다.
@@ -72,10 +74,10 @@ function SignUpForm({ userId, userPw, setUserId, setUserPw, todo, setTodo }) {
       userId,
       JSON.stringify({ userId, userPw, todo })
     );
-    // window.localStorage.setItem(login, JSON.stringify({ userId }));
     alert("회원가입이 완료되었습니다.");
     setUserId("");
     setUserPw("");
+    navigate("/");
   };
   const onChangeId = (e) => {
     setUserId(e.target.value);

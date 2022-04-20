@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 const LoginHead = styled.div`
   padding: 5px;
   border-bottom: 1px solid #3bc9db;
@@ -73,7 +74,7 @@ const SignUpBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function Login({ id, pw, setId, setPw, login }) {
+function Login({ id, pw, setId, setPw, login, setTodo }) {
   const onChangeId = (e) => {
     setId(e.target.value);
   };
@@ -91,15 +92,12 @@ function Login({ id, pw, setId, setPw, login }) {
       id === JSON.parse(localStorage.getItem(id)).userId &&
       pw === JSON.parse(localStorage.getItem(id)).userPw
     ) {
-      // const getData = JSON.parse(localStorage.getItem(id));
-      // getData.login = true;
-      // localStorage.setItem(id, JSON.stringify(getData));
       localStorage.setItem(login, JSON.stringify({ id }));
-      console.log(JSON.parse(localStorage.getItem(login)));
+      const point = JSON.parse(window.localStorage.getItem(login)).id;
+      const pointTodo = JSON.parse(window.localStorage.getItem(point)).todo;
+      setTodo(pointTodo);
       // 4. 로그인 성공시 메세지 출력과 함께 TodoApp으로 이동함
       alert(id + "님 환영합니다.");
-      // setId("");
-      // setPw("");
       navigate("/Todo");
     } else {
       alert("ID/PW확인요망");

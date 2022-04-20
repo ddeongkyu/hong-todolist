@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { HiX } from "react-icons/hi";
-// import generateRandomTodoId from "../util/generateRandomTodoId";
+
 const Remove = styled.div`
   display: flex;
   align-items: right;
@@ -36,15 +36,8 @@ function TodoItem({ todoItem, onRemoveItem, checked }) {
   const isDeletedChange = (e) => {
     if (e.target.checked === false) {
       todoItem.isDeleted = false;
-      console.log(todoItem.isDeleted);
-      // Text.className = "zzz";
-      // console.log(Text.className);
     } else if (e.target.checked === true) {
       todoItem.isDeleted = true;
-      console.log(todoItem.isDeleted);
-
-      // Text.className = "bbb";
-      // console.log(Text.className);
     }
   };
   return (

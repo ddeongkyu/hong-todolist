@@ -8,14 +8,7 @@ const ListTodo = styled.div`
   font-size: 25px;
 `;
 
-function TodoItems({
-  todo = [],
-  onRemove,
-  onChangeChk,
-  onRemoveItem,
-  isDeletedChange,
-  todoItem,
-}) {
+function TodoItems({ todo = [], onRemove, onChangeChk, onRemoveItem }) {
   return (
     <ListTodo>
       {todo.map((todoItem) => (
@@ -25,7 +18,6 @@ function TodoItems({
           key={todoItem.id}
           onChangeChk={onChangeChk}
           onRemoveItem={onRemoveItem}
-          // isDeletedChange={isDeletedChange}
         />
       ))}
     </ListTodo>

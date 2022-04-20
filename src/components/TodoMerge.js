@@ -18,17 +18,16 @@ function TodoApp({
   login,
 }) {
   useEffect(() => {
-    console.log(window.localStorage.getItem(id));
-    console.log(JSON.parse(window.localStorage.getItem(login)));
-    console.log("MOUNT");
-    if (JSON.parse(window.localStorage.getItem(login)).id === id) {
-      const point = JSON.parse(window.localStorage.getItem(login)).id;
-      const pointTodo = JSON.parse(window.localStorage.getItem(point)).todo;
-      setTodo(pointTodo);
-      console.log(pointTodo);
-    } else {
-      console.log("zzz");
-    }
+    // console.log(window.localStorage.getItem(id));
+    // console.log(JSON.parse(window.localStorage.getItem(login)));
+    // console.log("MOUNT");
+    // const getData = JSON.parse(localStorage.getItem(id));
+    // getData.todo = [];
+    // localStorage.setItem(id, JSON.stringify(getData));
+    // if (JSON.parse(window.localStorage.getItem(login)).id === id) {
+    // } else {
+    //   console.log("zzz");
+    // }
   }, []);
   const onChange = (e) => {
     setText(e.target.value);
@@ -43,7 +42,6 @@ function TodoApp({
         { id: generateRandomTodoId(), text, isDeleted: false },
       ];
       const finalTodo = nextTodo.filter((todo) => todo.isDeleted === false);
-      console.log(finalTodo);
       setTodo(finalTodo);
       setText("");
     }
@@ -56,18 +54,17 @@ function TodoApp({
     window.localStorage.getItem(login) !== null &&
     JSON.parse(window.localStorage.getItem(id).todo !== null)
   ) {
-    console.log("로그인되어있음");
+    // 로그인 된 상태
     const getData = JSON.parse(window.localStorage.getItem(id));
     getData.todo = todo;
     window.localStorage.setItem(id, JSON.stringify(getData));
-    console.log(getData);
   } else {
     console.log("???");
   }
 
   return (
     <Container>
-      <Head id={id} setId={setId} pw={pw} setPw={setPw} login={login} />
+      <Head id={id} login={login} todo={todo} />
       <TodoItems
         todo={todo}
         setTodo={setTodo}
