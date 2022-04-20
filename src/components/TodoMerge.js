@@ -17,18 +17,18 @@ function TodoApp({
   todoItem,
   login,
 }) {
-  useEffect(() => {
-    // console.log(window.localStorage.getItem(id));
-    // console.log(JSON.parse(window.localStorage.getItem(login)));
-    // console.log("MOUNT");
-    // const getData = JSON.parse(localStorage.getItem(id));
-    // getData.todo = [];
-    // localStorage.setItem(id, JSON.stringify(getData));
-    // if (JSON.parse(window.localStorage.getItem(login)).id === id) {
-    // } else {
-    //   console.log("zzz");
-    // }
-  }, []);
+  // useEffect(() => {
+  //   // console.log(window.localStorage.getItem(id));
+  //   // console.log(JSON.parse(window.localStorage.getItem(login)));
+  //   // console.log("MOUNT");
+  //   // const getData = JSON.parse(localStorage.getItem(id));
+  //   // getData.todo = [];
+  //   // localStorage.setItem(id, JSON.stringify(getData));
+  //   // if (JSON.parse(window.localStorage.getItem(login)).id === id) {
+  //   // } else {
+  //   //   console.log("zzz");
+  //   // }
+  // }, []);
   const onChange = (e) => {
     setText(e.target.value);
   };
