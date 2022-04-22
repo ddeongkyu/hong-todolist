@@ -65,7 +65,7 @@ const SignUpSummitBtn = styled.button`
   background-color: #03c75a;
 `;
 
-function SignUpForm({ userId, userPw, setUserId, setUserPw, todo }) {
+function SignUpForm({ userId, userPw, setUserId, setUserPw, todo = [] }) {
   let navigate = useNavigate();
   const saveData = () => {
     // 1. 회원가입할때 localstorage에 key 값으로는 유저가 입력한 id를 넣는다.

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Login from "./components/Login";
 import SignUpForm from "./components/SignUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -13,6 +13,19 @@ function App() {
   const [todo, setTodo] = useState([]);
   const [text, setText] = useState("");
   const { todoItem } = useState({});
+  useEffect(() => {
+    const loggedInUserIdFromLocalStorage =
+      localStorage.getItem("loggedInUserId");
+    const parsedLoggedInUser = JSON.parse(loggedInUserIdFromLocalStorage);
+
+    if (parsedLoggedInUser) {
+      const loggedInUserData = localStorage.getItem(parsedLoggedInUser);
+      const parsedUserData = JSON.parse(loggedInUserData);
+      setTodo(parsedUserData.todo);
+      setId(parsedUserData.userId);
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -25,7 +38,6 @@ function App() {
               setId={setId}
               setPw={setPw}
               login={login}
-              todo={todo}
               setTodo={setTodo}
             />
           }
@@ -38,10 +50,7 @@ function App() {
               userPw={userPw}
               setUserId={setUserId}
               setUserPw={setUserPw}
-              login={login}
-              setLogin={setLogin}
               todo={todo}
-              setTodo={setTodo}
             />
           }
         />
@@ -54,9 +63,6 @@ function App() {
               text={text}
               setText={setText}
               id={id}
-              pw={pw}
-              setId={setId}
-              setPw={setPw}
               todoItem={todoItem}
               login={login}
             />

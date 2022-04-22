@@ -27,12 +27,13 @@ const LogOut = styled.button`
   align-items: center;
   justify-content: center;
 `;
-function Head({ id, login }) {
+function Head({ id, login, setTodo }) {
   let navigate = useNavigate();
   const onClick = () => {
     // 6. TodoApp 상단의 로그아웃 버튼 클릭-> IsLogin 삭제한다.
     localStorage.removeItem(login);
-    alert("BYEBYE " + id + " 다음에 또 만나욤ㅋㅋ");
+    setTodo([]);
+    alert(id + "님 다음에 또 만나요!!!!");
     navigate("/");
   };
   return (

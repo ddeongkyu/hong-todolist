@@ -5,30 +5,30 @@ import Head from "./Head";
 import TodoItems from "./List";
 import generateRandomTodoId from "../util/generateRandomTodoId";
 
-function TodoApp({
-  id,
-  pw,
-  setId,
-  setPw,
-  todo,
-  setTodo,
-  text,
-  setText,
-  todoItem,
-  login,
-}) {
-  // useEffect(() => {
-  //   // console.log(window.localStorage.getItem(id));
-  //   // console.log(JSON.parse(window.localStorage.getItem(login)));
-  //   // console.log("MOUNT");
-  //   // const getData = JSON.parse(localStorage.getItem(id));
-  //   // getData.todo = [];
-  //   // localStorage.setItem(id, JSON.stringify(getData));
-  //   // if (JSON.parse(window.localStorage.getItem(login)).id === id) {
-  //   // } else {
-  //   //   console.log("zzz");
-  //   // }
-  // }, []);
+function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
+  // Since getting an id from localStorage is async, id can be null at first.
+  // And then it becomes valid after the first render once it's fetched from localStorage.
+  // Moreover, we don't need to do any logic hereif there's no id (if there's no loggedInUser)
+  // from -HONG;
+  useEffect(() => {
+    setTodo([]);
+    const bringLoginId = JSON.parse(window.localStorage.getItem(login)).id;
+    const refreshTodo = JSON.parse(
+      window.localStorage.getItem(bringLoginId)
+    ).todo;
+    setTodo(refreshTodo);
+    if (!id) return;
+    if (
+      window.localStorage.getItem(login) !== null &&
+      JSON.parse(window.localStorage.getItem(id).todo !== null)
+    ) {
+      const getData = JSON.parse(window.localStorage.getItem(id));
+      getData.todo = todo;
+      window.localStorage.setItem(id, JSON.stringify(getData));
+      setTodo(todo);
+    }
+  }, [id]);
+
   const onChange = (e) => {
     setText(e.target.value);
   };
@@ -43,28 +43,26 @@ function TodoApp({
       ];
       const finalTodo = nextTodo.filter((todo) => todo.isDeleted === false);
       setTodo(finalTodo);
+      // 아예 finalTodo 자체를 localStorage의 todo안에 넣어버리면?
+      // 그렇다면 내가 원하는걸 할 수 있지 않을까?
+      // login id 가져오기
+      const getLoginId = JSON.parse(window.localStorage.getItem(login)).id;
+      // login id를 key로 사용해보기
+      const getData = JSON.parse(window.localStorage.getItem(getLoginId));
+      // 데이터를 수정하고
+      getData.todo = finalTodo;
+      // 데이터 덮어쓰기를 해보자
+      window.localStorage.setItem(getLoginId, JSON.stringify(getData));
       setText("");
     }
   };
   const onRemoveItem = (id) => {
     setTodo(todo.filter((todo) => todo.id !== id));
   };
-  // 5. TodoApp에서 만들고 삭제된 Todo배열들을 2에서 만든 value의 todo[]에 넣는다
-  if (
-    window.localStorage.getItem(login) !== null &&
-    JSON.parse(window.localStorage.getItem(id).todo !== null)
-  ) {
-    // 로그인 된 상태
-    const getData = JSON.parse(window.localStorage.getItem(id));
-    getData.todo = todo;
-    window.localStorage.setItem(id, JSON.stringify(getData));
-  } else {
-    console.log("???");
-  }
 
   return (
     <Container>
-      <Head id={id} login={login} todo={todo} />
+      <Head id={id} login={login} todo={todo} setTodo={setTodo} />
       <TodoItems
         todo={todo}
         setTodo={setTodo}
