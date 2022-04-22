@@ -86,6 +86,9 @@ function Login({ id, pw, setId, setPw, login, setTodo }) {
     navigate("/SignUp");
   }
   function handleClickClick() {
+    if (window.localStorage.length === 0) {
+      alert("ID/PW확인요망");
+    }
     // 3. Login 페이지에서 id,pw 작성 후 로그인 버튼을 누르면 ->
     // Login이라는 key값이 생기고 value에 id를 넣음. (그 전에 유저가 입력한 id가 localstorage의 pw와 일치하는지 여부 확인 필수)
     if (
