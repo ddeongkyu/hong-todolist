@@ -8,16 +8,16 @@ const ListTodo = styled.div`
   font-size: 25px;
 `;
 
-function TodoItems({ todo = [], onRemove, onChangeChk, onRemoveItem }) {
+function TodoItems({ todo = [], onRemoveItem, id, onSave }) {
   return (
     <ListTodo>
       {todo.map((todoItem) => (
         <TodoItem
           todoItem={todoItem}
-          onRemove={onRemove}
           key={todoItem.id}
-          onChangeChk={onChangeChk}
           onRemoveItem={onRemoveItem}
+          id={id}
+          onSave={onSave}
         />
       ))}
     </ListTodo>

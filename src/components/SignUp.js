@@ -1,4 +1,3 @@
-// import { JSON } from "mysql/lib/protocol/constants/types";
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
@@ -68,20 +67,24 @@ const SignUpSummitBtn = styled.button`
 function SignUpForm({ userId, userPw, setUserId, setUserPw, todo = [] }) {
   let navigate = useNavigate();
   const saveData = () => {
-    // 1. 회원가입할때 localstorage에 key 값으로는 유저가 입력한 id를 넣는다.
-    // 2. id의 value에는 비밀번호, todo[](배열ㅎㅎ)을 넣는다.
-    window.localStorage.setItem(
-      userId,
-      JSON.stringify({ userId, userPw, todo })
-    );
-    alert("회원가입이 완료되었습니다.");
-    setUserId("");
-    setUserPw("");
-    navigate("/");
+    if (userId !== "" && userPw !== "") {
+      window.localStorage.setItem(
+        userId,
+        JSON.stringify({ userId, userPw, todo })
+      );
+      alert("회원가입이 완료되었습니다.");
+      setUserId("");
+      setUserPw("");
+      navigate("/");
+    } else {
+      alert("공백은 안되용!");
+    }
   };
+
   const onChangeId = (e) => {
     setUserId(e.target.value);
   };
+
   const onChangePw = (e) => {
     setUserPw(e.target.value);
   };
@@ -92,12 +95,12 @@ function SignUpForm({ userId, userPw, setUserId, setUserPw, todo = [] }) {
         <h1>회원가입</h1>
       </SignUpHead>
       <SignUpIdInput
-        placeholder="사용할 ID를 입력하세요"
+        placeholder="사용할 ID를 입력하세요!"
         value={userId}
         onChange={onChangeId}
       />
       <SignUpPwInput
-        placeholder="사용할 PW를 입력하세요"
+        placeholder="사용할 PW를 입력하세요!"
         type="password"
         value={userPw}
         onChange={onChangePw}

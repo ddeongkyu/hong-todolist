@@ -31,21 +31,25 @@ const ItemBlock = styled.div`
   }
 `;
 
-function TodoItem({ todoItem, onRemoveItem, checked }) {
+function TodoItem({ todoItem, onRemoveItem, onSave }) {
   const isDeleted = todoItem.isDeleted;
+
   const isDeletedChange = (e) => {
     if (e.target.checked === false) {
       todoItem.isDeleted = false;
+      onSave();
     } else if (e.target.checked === true) {
       todoItem.isDeleted = true;
+      onSave();
     }
   };
+
   return (
     <ItemBlock>
       <input type="checkbox" onChange={isDeletedChange} />
       <Text
         isDeleted={isDeleted}
-        style={{ textDecoration: checked && "line-through" }}
+        style={{ textDecoration: isDeleted && "line-through" }}
       >
         {todoItem.text}
       </Text>

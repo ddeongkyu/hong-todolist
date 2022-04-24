@@ -9,10 +9,11 @@ function App() {
   const [pw, setPw] = useState("");
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
-  const [login, setLogin] = useState(true);
+  const [login] = useState(true);
   const [todo, setTodo] = useState([]);
   const [text, setText] = useState("");
   const { todoItem } = useState({});
+
   useEffect(() => {
     const loggedInUserIdFromLocalStorage =
       localStorage.getItem("loggedInUserId");
