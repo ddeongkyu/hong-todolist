@@ -45,11 +45,11 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
         { id: generateRandomTodoId(), text, isDeleted: false },
       ];
       const finalTodo = nextTodo.filter((todo) => todo.isDeleted === false);
-      setTodo(finalTodo);
       const getLoginId = JSON.parse(window.localStorage.getItem(login)).id;
       const getData = JSON.parse(window.localStorage.getItem(getLoginId));
       getData.todo = finalTodo;
       window.localStorage.setItem(getLoginId, JSON.stringify(getData));
+      setTodo(finalTodo);
       setText("");
     }
   };
@@ -66,8 +66,12 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
   };
 
   const onRemoveItem = (id) => {
-    setTodo(todo.filter((todo) => todo.id !== id));
-    onSave();
+    const removeTodo = todo.filter((todo) => todo.id !== id);
+    setTodo(removeTodo);
+    const getLoginId = JSON.parse(window.localStorage.getItem(login)).id;
+    const getData = JSON.parse(window.localStorage.getItem(getLoginId));
+    getData.todo = removeTodo;
+    window.localStorage.setItem(getLoginId, JSON.stringify(getData));
   };
 
   let navigate = useNavigate();
@@ -77,6 +81,20 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
     alert(id + "님 다음에 또 만나요!!!!");
     navigate("/");
   };
+
+  const isDeletedChange = (e) => {
+    if (e.target.checked) {
+      console.log(todo);
+      console.log(e.target);
+      todo[0].isDeleted = true;
+      onSave();
+    } else if (!e.target.checked) {
+      console.log(todo);
+      console.log(e.target);
+      onSave();
+    }
+  };
+
   return (
     <Container>
       <Head onHeadClick={onHeadClick} />
@@ -84,12 +102,10 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
         todo={todo}
         onRemoveItem={onRemoveItem}
         todoItem={todoItem}
-        id={id}
-        onSave={onSave}
+        isDeletedChange={isDeletedChange}
       />
       <CreateTodo onChange={onChange} onAddTodo={onAddTodo} text={text} />
     </Container>
   );
 }
-
 export default TodoApp;

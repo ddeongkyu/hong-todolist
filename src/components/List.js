@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import TodoItem from "./Item";
-
 const ListTodo = styled.div`
   width: 100%;
   height: auto;
   font-size: 25px;
 `;
 
-function TodoItems({ todo = [], onRemoveItem, id, onSave }) {
+function TodoItems({ todo = [], onRemoveItem, isDeletedChange }) {
   return (
     <ListTodo>
       {todo.map((todoItem) => (
@@ -16,12 +15,10 @@ function TodoItems({ todo = [], onRemoveItem, id, onSave }) {
           todoItem={todoItem}
           key={todoItem.id}
           onRemoveItem={onRemoveItem}
-          id={id}
-          onSave={onSave}
+          isDeletedChange={isDeletedChange}
         />
       ))}
     </ListTodo>
   );
 }
-
 export default TodoItems;

@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 const SignUpHead = styled.div`
   padding: 5px;
   border-bottom: 1px solid #3bc9db;
   width: 250px;
   height: 40px;
-
   h1 {
     margin: 0;
     font-size: 30px;
@@ -16,13 +14,11 @@ const SignUpHead = styled.div`
     font-weight: bold;
   }
 `;
-
 const SignUpContainer = styled.div`
   margin-top: 100px;
   padding: 20px;
   margin-left: 160px;
 `;
-
 const SignUpIdInput = styled.input`
   position: relative;
   overflow: hidden;
@@ -34,7 +30,6 @@ const SignUpIdInput = styled.input`
   background: #fff;
   box-sizing: border-box;
 `;
-
 const SignUpPwInput = styled.input`
   position: relative;
   overflow: hidden;
@@ -47,7 +42,6 @@ const SignUpPwInput = styled.input`
   background: #fff;
   box-sizing: border-box;
 `;
-
 const SignUpSummitBtn = styled.button`
   font-size: 18px;
   font-weight: 700;
@@ -63,7 +57,6 @@ const SignUpSummitBtn = styled.button`
   border-radius: 0;
   background-color: #03c75a;
 `;
-
 function SignUpForm({ userId, userPw, setUserId, setUserPw, todo = [] }) {
   let navigate = useNavigate();
   const saveData = () => {
@@ -88,7 +81,6 @@ function SignUpForm({ userId, userPw, setUserId, setUserPw, todo = [] }) {
   const onChangePw = (e) => {
     setUserPw(e.target.value);
   };
-
   return (
     <SignUpContainer>
       <SignUpHead>
@@ -109,5 +101,4 @@ function SignUpForm({ userId, userPw, setUserId, setUserPw, todo = [] }) {
     </SignUpContainer>
   );
 }
-
 export default SignUpForm;

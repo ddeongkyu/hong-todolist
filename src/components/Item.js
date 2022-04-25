@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { HiX } from "react-icons/hi";
-
 const Remove = styled.div`
   display: flex;
   align-items: right;
@@ -31,25 +30,12 @@ const ItemBlock = styled.div`
   }
 `;
 
-function TodoItem({ todoItem, onRemoveItem, onSave }) {
-  const isDeleted = todoItem.isDeleted;
-
-  const isDeletedChange = (e) => {
-    if (e.target.checked === false) {
-      todoItem.isDeleted = false;
-      onSave();
-    } else if (e.target.checked === true) {
-      todoItem.isDeleted = true;
-      onSave();
-    }
-  };
-
+function TodoItem({ todoItem, onRemoveItem, isDeletedChange }) {
   return (
     <ItemBlock>
       <input type="checkbox" onChange={isDeletedChange} />
       <Text
-        isDeleted={isDeleted}
-        style={{ textDecoration: isDeleted && "line-through" }}
+      // style={{ textDecoration: isDeleted && "line-through" }}
       >
         {todoItem.text}
       </Text>
@@ -59,5 +45,4 @@ function TodoItem({ todoItem, onRemoveItem, onSave }) {
     </ItemBlock>
   );
 }
-
 export default React.memo(TodoItem);

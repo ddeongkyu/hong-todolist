@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 const LoginHead = styled.div`
   padding: 5px;
   border-bottom: 1px solid #3bc9db;
@@ -73,7 +72,6 @@ const SignUpBtn = styled.button`
   border-radius: 0;
   background-color: #03c75a;
 `;
-
 function Login({ id, pw, setId, setPw, login, setTodo }) {
   const onChangeId = (e) => {
     setId(e.target.value);
@@ -128,5 +126,4 @@ function Login({ id, pw, setId, setPw, login, setTodo }) {
     </LoginContainer>
   );
 }
-
 export default Login;

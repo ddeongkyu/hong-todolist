@@ -3,7 +3,6 @@ import Login from "./components/Login";
 import SignUpForm from "./components/SignUp";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TodoApp from "./components/TodoMerge";
-
 function App() {
   const [id, setId] = useState("");
   const [pw, setPw] = useState("");
@@ -18,7 +17,6 @@ function App() {
     const loggedInUserIdFromLocalStorage =
       localStorage.getItem("loggedInUserId");
     const parsedLoggedInUser = JSON.parse(loggedInUserIdFromLocalStorage);
-
     if (parsedLoggedInUser) {
       const loggedInUserData = localStorage.getItem(parsedLoggedInUser);
       const parsedUserData = JSON.parse(loggedInUserData);
@@ -26,7 +24,6 @@ function App() {
       setId(parsedUserData.userId);
     }
   }, []);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -73,5 +70,4 @@ function App() {
     </BrowserRouter>
   );
 }
-
 export default App;
