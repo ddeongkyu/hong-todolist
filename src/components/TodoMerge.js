@@ -13,7 +13,6 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
   // from -HONG;
 
   useEffect(() => {
-    setTodo([]);
     const bringLoginId = JSON.parse(window.localStorage.getItem(login)).id;
     const refreshTodo = JSON.parse(
       window.localStorage.getItem(bringLoginId)
@@ -84,17 +83,28 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
 
   const isDeletedChange = (e) => {
     if (e.target.checked) {
-      console.log(todo);
-      console.log(e.target);
-      todo[0].isDeleted = true;
+      for (let i = 0; i < todo.length; i++) {
+        todo[i].isDeleted = true;
+        console.log(todo[i].isDeleted);
+        console.log(todo);
+        // console.log(todo[i]);
+        // todo[i].isDeleted = true;
+        // e.currentTarget = todo[i].isDeleted;
+        // console.log(e.target.value);
+      }
       onSave();
+      console.log("??");
+      // console.log(e.target.checked);
+      // todo[0].isDeleted = true;
+      // console.log(todo.length);
     } else if (!e.target.checked) {
-      console.log(todo);
-      console.log(e.target);
+      // console.log(e.target.checked);
+      // console.log(todo.length);
+      // todo[0].isDeleted = false;
+      console.log("###");
       onSave();
     }
   };
-
   return (
     <Container>
       <Head onHeadClick={onHeadClick} />

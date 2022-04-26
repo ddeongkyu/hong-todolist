@@ -35,7 +35,7 @@ function TodoItem({ todoItem, onRemoveItem, isDeletedChange }) {
     <ItemBlock>
       <input type="checkbox" onChange={isDeletedChange} />
       <Text
-      // style={{ textDecoration: isDeleted && "line-through" }}
+      // style={{ textDecoration: "line-through" }}
       >
         {todoItem.text}
       </Text>
