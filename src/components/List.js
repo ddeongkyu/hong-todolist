@@ -22,5 +22,4 @@ function TodoItems({ todo = [], onRemoveItem, isDeletedChange }) {
     </ListTodo>
   );
 }
-
 export default TodoItems;
