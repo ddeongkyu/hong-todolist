@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { HiX } from "react-icons/hi";
+import "../App.css";
+
 const Remove = styled.div`
   display: flex;
   align-items: right;
@@ -10,14 +12,8 @@ const Remove = styled.div`
 `;
 const Text = styled.div`
   flex: 1;
-  font-size: 21px;
+  font-size: 23px;
   color: #495057;
-  // text-decoration: line-through;
-  ${({ isDeleted }) => {
-    return isDeleted === true
-      ? `text-decoration: line-through`
-      : `text-decoration: none`;
-  }}
 `;
 const ItemBlock = styled.div`
   display: flex;
@@ -31,14 +27,23 @@ const ItemBlock = styled.div`
 `;
 
 function TodoItem({ todoItem, onRemoveItem, isDeletedChange }) {
+  const [style, setStyle] = useState("nonText");
+  const onChangeStyle = (e) => {
+    if (e.target.checked) {
+      setStyle("yesText");
+    } else if (!e.target.checked) {
+      setStyle("nonText");
+    }
+  };
+
   return (
     <ItemBlock>
-      <input type="checkbox" onChange={isDeletedChange} />
-      <Text
-      // style={{ textDecoration: "line-through" }}
-      >
-        {todoItem.text}
-      </Text>
+      <input
+        type="checkbox"
+        onClick={onChangeStyle}
+        onChange={() => isDeletedChange(todoItem.id)}
+      />
+      <Text className={style}>{todoItem.text}</Text>
       <Remove>
         <HiX onClick={() => onRemoveItem(todoItem.id)} />
       </Remove>

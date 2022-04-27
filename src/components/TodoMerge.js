@@ -7,11 +7,6 @@ import generateRandomTodoId from "../util/generateRandomTodoId";
 import { useNavigate } from "react-router-dom";
 
 function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
-  // Since getting an id from localStorage is async, id can be null at first.
-  // And then it becomes valid after the first render once it's fetched from localStorage.
-  // Moreover, we don't need to do any logic hereif there's no id (if there's no loggedInUser)
-  // from -HONG;
-
   useEffect(() => {
     const bringLoginId = JSON.parse(window.localStorage.getItem(login)).id;
     const refreshTodo = JSON.parse(
@@ -53,17 +48,6 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
     }
   };
 
-  const onSave = () => {
-    const bringLoginId = JSON.parse(window.localStorage.getItem(login)).id;
-    const refrehTodo = JSON.parse(
-      window.localStorage.getItem(bringLoginId)
-    ).todo;
-    const getData = JSON.parse(window.localStorage.getItem(bringLoginId));
-    getData.todo = todo;
-    window.localStorage.setItem(bringLoginId, JSON.stringify(getData));
-    setTodo(refrehTodo);
-  };
-
   const onRemoveItem = (id) => {
     const removeTodo = todo.filter((todo) => todo.id !== id);
     setTodo(removeTodo);
@@ -81,30 +65,23 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
     navigate("/");
   };
 
-  const isDeletedChange = (e) => {
-    if (e.target.checked) {
-      for (let i = 0; i < todo.length; i++) {
-        todo[i].isDeleted = true;
-        console.log(todo[i].isDeleted);
-        console.log(todo);
-        // console.log(todo[i]);
-        // todo[i].isDeleted = true;
-        // e.currentTarget = todo[i].isDeleted;
-        // console.log(e.target.value);
+  const isDeletedChange = (todoId) => {
+    const newTodo = todo.map((item) => {
+      if (item.id === todoId) {
+        return {
+          ...item,
+          isDeleted: true,
+        };
       }
-      onSave();
-      console.log("??");
-      // console.log(e.target.checked);
-      // todo[0].isDeleted = true;
-      // console.log(todo.length);
-    } else if (!e.target.checked) {
-      // console.log(e.target.checked);
-      // console.log(todo.length);
-      // todo[0].isDeleted = false;
-      console.log("###");
-      onSave();
-    }
+      return item;
+    });
+    setTodo(newTodo);
+    const bringLoginId = JSON.parse(window.localStorage.getItem(login)).id;
+    const getData = JSON.parse(window.localStorage.getItem(bringLoginId));
+    getData.todo = newTodo;
+    window.localStorage.setItem(bringLoginId, JSON.stringify(getData));
   };
+
   return (
     <Container>
       <Head onHeadClick={onHeadClick} />

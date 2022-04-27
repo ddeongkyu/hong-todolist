@@ -72,6 +72,7 @@ const SignUpBtn = styled.button`
   border-radius: 0;
   background-color: #03c75a;
 `;
+
 function Login({ id, pw, setId, setPw, login, setTodo }) {
   const onChangeId = (e) => {
     setId(e.target.value);
