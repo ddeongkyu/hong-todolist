@@ -81,29 +81,49 @@ function TodoApp({ id, todo, setTodo, text, setText, todoItem, login }) {
     navigate("/");
   };
 
-  const isDeletedChange = (e) => {
-    if (e.target.checked) {
-      for (let i = 0; i < todo.length; i++) {
-        todo[i].isDeleted = true;
-        console.log(todo[i].isDeleted);
-        console.log(todo);
-        // console.log(todo[i]);
-        // todo[i].isDeleted = true;
-        // e.currentTarget = todo[i].isDeleted;
-        // console.log(e.target.value);
+  const isDeletedChange = (todoId) => {
+    // 1. 클릭된 투두 아이템을 가지고
+
+    // map vs forEach 차이점 아는게 엄청 중요해.
+
+    // 2. 그 투두 아이템의 isDeleted = true로 바꾸고
+    const newTodo = todo.map((item) => {
+      // id 매치되는걸 찾아서 isDeleted = treu로 바꾼다.
+      if (item.id === todoId) {
+        return {
+          ...item,
+          isDeleted: true
+        }
       }
-      onSave();
-      console.log("??");
-      // console.log(e.target.checked);
-      // todo[0].isDeleted = true;
-      // console.log(todo.length);
-    } else if (!e.target.checked) {
-      // console.log(e.target.checked);
-      // console.log(todo.length);
-      // todo[0].isDeleted = false;
-      console.log("###");
-      onSave();
-    }
+      // 2. 매치되는 아이디를 제외한 나머지 아이템들은 아무것도 안하고 그 상태 그대로 리턴한다.
+      return item;
+    })
+    setTodo(newTodo)
+    onSave()
+
+    // 3. 전체 투두에 업데이트 한다.
+    // if (e.target.checked) {
+    //   for (let i = 0; i < todo.length; i++) {
+    //     todo[i].isDeleted = true;
+    //     console.log(todo[i].isDeleted);
+    //     console.log(todo);
+    //     // console.log(todo[i]);
+    //     // todo[i].isDeleted = true;
+    //     // e.currentTarget = todo[i].isDeleted;
+    //     // console.log(e.target.value);
+    //   }
+    //   onSave();
+    //   console.log("??");
+    //   // console.log(e.target.checked);
+    //   // todo[0].isDeleted = true;
+    //   // console.log(todo.length);
+    // } else if (!e.target.checked) {
+    //   // console.log(e.target.checked);
+    //   // console.log(todo.length);
+    //   // todo[0].isDeleted = false;
+    //   console.log("###");
+    //   onSave();
+    // }
   };
   return (
     <Container>

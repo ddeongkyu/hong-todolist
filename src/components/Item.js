@@ -33,7 +33,7 @@ const ItemBlock = styled.div`
 function TodoItem({ todoItem, onRemoveItem, isDeletedChange }) {
   return (
     <ItemBlock>
-      <input type="checkbox" onChange={isDeletedChange} />
+      <input type="checkbox" onChange={() => isDeletedChange(todoItem.id)} />
       <Text
       // style={{ textDecoration: "line-through" }}
       >
