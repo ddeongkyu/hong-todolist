@@ -18,4 +18,4 @@ Input의 text를 입력하고 Button을 누른다면 TodoItem 컴포넌트 안�
 
 ### 실행
 
-터미널에서 npm start 쓰세요... ㅋㅋ
+터미널에서 npm start 를 입력해주세요!
