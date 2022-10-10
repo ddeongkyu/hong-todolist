@@ -16,6 +16,14 @@ text의 오른쪽에는 X표시가 있으며, 이를 클릭하면 입력한 text
 CreateTodo 컴포넌트에는 Input과 Button이 있습니다.
 Input의 text를 입력하고 Button을 누른다면 TodoItem 컴포넌트 안으로 들어갑니다.
 
+### Detail
+
+멀티 유저를 지원합니다.
+
+Local Storage를 이용하여 이전 로그인 유저의 Todo List를 저장하며,
+
+로그아웃 후 다시 로그인 하여 들어가도 이전에 작성하였던 Todo List가 유지됩니다.
+
 ### 실행
 
-터미널에서 npm start 를 입력해주세요!
+터미널에서 `npm start`를 입력해 주세요 !
